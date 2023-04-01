@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Task Timer</title>
+</head>
+
+<body>
+  <h1>Welcome to Task Timer</h1>
+
+  <div class="global-data">
+    <ul>
+      <li>
+        <button class="global-data__button global-data__button--add-new" type="button">Add new timer</button>
+      </li>
+      <li>
+        <button class="global-data__button global-data__button--delete-all" type="button">Delete All</button>
+      </li>
+      <li>
+        <button class="global-data__button global-data__button--pause-all" type="button">Pause All</button>
+      </li>
+      <li>Total time: 5:21:16</li>
+      <li>Rounded time: 5:45:00</li>
+    </ul>
+  </div>
+
+  <table class="timer-table">
+    <thead class="timer-table__landmark timer-table__landmark--header">
+      <tr class="timer-table__row timer-table__row--header">
+        <th class="timer-table__cell timer-table__cell--header timer-table__cell--client" scope="col">Client</th>
+        <th class="timer-table__cell timer-table__cell--header timer-table__cell--task" scope="col">Task</th>
+        <th class="timer-table__cell timer-table__cell--header timer-table__cell--description" scope="col">Description</th>
+        <th class="timer-table__cell timer-table__cell--header timer-table__cell--operations" scope="col">Operations
+        </th>
+        <th class="timer-table__cell timer-table__cell--header timer-table__cell--time-spent" scope="col">Time Spent
+        </th>
+        <th class="timer-table__cell timer-table__cell--header timer-table__cell--time-rounded" scope="col">Rounded</th>
+      </tr>
+    </thead>
+    <tbody class="timer-table__landmark timer-table__landmark--body"></tbody>
+    <tfoot class="timer-table__landmark timer-table__landmark--footer">
+      <tr class="timer-table__row timer-table__row--footer">
+        <th class="timer-table__cell timer-table__cell--footer timer-table__cell--client" scope="col">Totals</th>
+        <th class="timer-table__cell timer-table__cell--footer timer-table__cell--task" scope="col"></th>
+        <th class="timer-table__cell timer-table__cell--footer timer-table__cell--description" scope="col"></th>
+        <th class="timer-table__cell timer-table__cell--footer timer-table__cell--operations" scope="col"></th>
+        <th class="timer-table__cell timer-table__cell--footer timer-table__cell--time-spent" scope="col">0</th>
+        <th class="timer-table__cell timer-table__cell--footer timer-table__cell--time-rounded" scope="col">0</th>
+      </tr>
+    </tfoot>
+  </table>
+
+  <template class="timer-table__template">
+    <tr class="timer-table__row timer-table__row--body">
+      <td class="timer-table__cell timer-table__cell--body timer-table__cell--client">
+        <input id="timer-table__cell-input--client" class="timer-table__cell-input timer-table__cell-input--client" placeholder="Client">
+      </td>
+      <td class="timer-table__cell timer-table__cell--body timer-table__cell--task">
+        <input id="timer-table__cell-input--task" class="timer-table__cell-input timer-table__cell-input--task" placeholder="Task">
+      </td>
+      <td class="timer-table__cell timer-table__cell--body timer-table__cell--description">
+        <input id="timer-table__cell-input--description" class="timer-table__cell-input timer-table__cell-input--description" placeholder="Description">
+      </td>
+      <td class="timer-table__cell timer-table__cell--body timer-table__cell--operations">
+        <button class="timer-table__action timer-table__action--start" type="button" data-running="false">Start</button>
+        <button class="timer-table__action timer-table__action--delete" type="button">Delete</button>
+        <button class="timer-table__action timer-table__action--merge" type="button">Merge</button>
+        <button class="timer-table__action timer-table__action--move" type="button">Move</button>
+      </td>
+      <td class="timer-table__cell timer-table__cell--body timer-table__cell--time-spent">0</td>
+      <td class="timer-table__cell timer-table__cell--body timer-table__cell--time-rounded">0</td>
+    </tr>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

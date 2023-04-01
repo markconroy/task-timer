@@ -1,0 +1,47 @@
+:root {
+  --border-width: 1px;
+  --border-style: solid;
+  --border-color: black;
+  --border: var(--border-width) var(--border-style) var(--border-color);
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+input,
+button,
+select {
+  font-size: 1rem;
+}
+
+.timer-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: var(--border);
+  text-align: left;
+}
+
+.timer-table__landmark--header,
+.timer-table__landmark--footer {
+  background-color: beige;
+}
+
+.timer-table__row--body:nth-child(2n+1) {
+  background-color: lightblue;
+}
+
+.timer-table__cell {
+  padding: 1rem;
+}
+
+.timer-table__cell + .timer-table__cell {
+  border-left: var(--border);
+}
+.timer-table__cell--time-spent,
+.timer-table__cell--time-rounded {
+  width: 150px;
+  text-align: right;
+}
