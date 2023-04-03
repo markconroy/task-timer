@@ -1,6 +1,25 @@
 const addNewButton = document.querySelector(".global-data__button--add-new");
 const tableBody = document.querySelector(".timer-table__landmark--body");
 const tableTemplate = document.querySelector(".timer-table__template");
+let currentTimerTime;
+let currentTimerTimeSlot;
+let totalTime;
+
+function startTheClock() {
+  const activeTimerStartButton = document.querySelector('[data-running="true"]');
+  const activeTimer = activeTimerStartButton.closest('.timer-table__row');
+  currentTimerTimeSlot = activeTimer.querySelector('.timer-table__cell--time-spent');
+  currentTimerTime = parseInt(activeTimer.querySelector('.timer-table__cell--time-spent').innerText);
+  console.log(currentTimerTime);
+  setInterval(() => {
+    currentTimerTime = currentTimerTime + 1;
+    currentTimerTimeSlot.innerText = currentTimerTime;
+  }, 1000);
+}
+
+function stopTheClock() {
+  console.log('clock stopped');
+}
 
 function handleStartButton(e) {
   const selector = "timer-table__action--start";
@@ -8,61 +27,54 @@ function handleStartButton(e) {
     return;
   }
 
-  const activeTimer = e.originalTarget;
-  const isRunning = activeTimer.getAttribute("data-running");
+  const activeTimerStartButton = e.originalTarget;
+  const activeTimer = activeTimerStartButton.closest('.timer-table__row');
+  const isRunning = activeTimerStartButton.getAttribute("data-running");
   const startTimerButtons = Array.from(
     document.querySelectorAll(".timer-table__action--start")
   );
 
-  startTimerButtons.forEach((item) => {
-    if (item != activeTimer) {
-      item.setAttribute("data-running", "false");
-      item.innerText = "Start";
+  startTimerButtons.forEach((startTimerButton) => {
+    if (startTimerButton != activeTimerStartButton) {
+      startTimerButton.setAttribute("data-running", "false");
+      startTimerButton.innerText = "Start";
     } else {
       if (isRunning === "true") {
-        item.setAttribute("data-running", "false");
-        item.innerText = "Start";
+        startTimerButton.setAttribute("data-running", "false");
+        startTimerButton.innerText = "Start";
+        stopTheClock();
       } else {
-        item.setAttribute("data-running", "true");
-        item.innerText = "Stop";
+        startTimerButton.setAttribute("data-running", "true");
+        startTimerButton.innerText = "Stop";
+        startTheClock();
       }
     }
   });
 }
 
-function handleDeleteButton() {
+function handleDeleteButton(e) {
   const selector = "timer-table__action--delete";
   if (!e.target.classList.contains(selector)) {
     return;
   }
 
-  const activeTimer = e.originalTarget;
+  const activeTimerStartButton = e.originalTarget;
+  const activeTimer = activeTimerStartButton.closest('.timer-table__row');
   const deleteTimerButtons = Array.from(
     document.querySelectorAll(".timer-table__action--delete")
   );
 }
 
-function handleMergeButton() {
-  const selector = "timer-table__action--merge";
+function handleEditTimeButton(e) {
+  const selector = "timer-table__action--edit-time";
   if (!e.target.classList.contains(selector)) {
     return;
   }
 
-  const activeTimer = e.originalTarget;
-  const mergeTimerButtons = Array.from(
-    document.querySelectorAll(".timer-table__action--merge")
-  );
-}
-
-function handleMoveButton() {
-  const selector = "timer-table__action--move";
-  if (!e.target.classList.contains(selector)) {
-    return;
-  }
-
-  const activeTimer = e.originalTarget;
-  const moveTimerButtons = Array.from(
-    document.querySelectorAll(".timer-table__action--move")
+  const activeTimerStartButton = e.originalTarget;
+  const activeTimer = activeTimerStartButton.closest('.timer-table__row');
+  const editTimerButtons = Array.from(
+    document.querySelectorAll(".timer-table__action--edit-time")
   );
 }
 
@@ -73,7 +85,6 @@ function handleAddNewItem() {
 addNewButton.addEventListener("click", handleAddNewItem);
 document.addEventListener("click", handleStartButton);
 document.addEventListener("click", handleDeleteButton);
-document.addEventListener("click", handleMergeButton);
-document.addEventListener("click", handleMoveButton);
+document.addEventListener("click", handleEditTimeButton);
 
 handleAddNewItem();
