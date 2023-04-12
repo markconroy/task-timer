@@ -49,13 +49,13 @@
         <th class="timer-table__cell timer-table__cell--footer timer-table__cell--description" scope="col"></th>
         <th class="timer-table__cell timer-table__cell--footer timer-table__cell--operations" scope="col"></th>
         <th class="timer-table__cell timer-table__cell--footer timer-table__cell--time-spent" scope="col">0</th>
-        <th class="timer-table__cell timer-table__cell--footer timer-table__cell--time-rounded" scope="col">0</th>
+        <th class="timer-table__cell timer-table__cell--footer timer-table__cell--time-rounded" scope="col">0h - 0m</th>
       </tr>
     </tfoot>
   </table>
 
   <template class="timer-table__template">
-    <tr class="timer-table__row timer-table__row--body">
+    <tr class="timer-table__row timer-table__row--body" data-seconds="0">
       <td class="timer-table__cell timer-table__cell--body timer-table__cell--client">
         <input id="timer-table__cell-input--client" class="timer-table__cell-input timer-table__cell-input--client" placeholder="Client">
       </td>
@@ -71,7 +71,7 @@
         <button class="timer-table__action timer-table__action--edit-time" type="button">Edit Time</button>
       </td>
       <td class="timer-table__cell timer-table__cell--body timer-table__cell--time-spent">0</td>
-      <td class="timer-table__cell timer-table__cell--body timer-table__cell--time-rounded">0</td>
+      <td class="timer-table__cell timer-table__cell--body timer-table__cell--time-rounded">0h - 0m</td>
     </tr>
   </template>
 

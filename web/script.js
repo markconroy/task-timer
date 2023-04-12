@@ -2,9 +2,11 @@ const addNewButton = document.querySelector(".global-data__button--add-new");
 const tableBody = document.querySelector(".timer-table__landmark--body");
 const tableTemplate = document.querySelector(".timer-table__template");
 let startTimer;
-let currentTimerTime;
+let currentTimerTime = 0;
 let currentTimerTimeSlot;
 let totalTime;
+let roundedMinutes;
+let roundedHours;
 
 function convertSecondsToTime(totalSeconds) {
 
@@ -21,13 +23,33 @@ function startTheClock() {
   const activeTimer = activeTimerStartButton.closest('.timer-table__row');
 
   currentTimerTimeSlot = activeTimer.querySelector('.timer-table__cell--time-spent');
-  currentTimerTime = parseInt(activeTimer.querySelector('.timer-table__cell--time-spent').innerText);
+  currentTimerRoundedSlot = activeTimer.querySelector('.timer-table__cell--time-rounded');
+  currentTimerTime = parseInt(activeTimer.getAttribute('data-seconds'));
 
   clearInterval(startTimer);
   startTimer = setInterval(() => {
     currentTimerTime = currentTimerTime + 1;
     const secondsToTime = convertSecondsToTime(currentTimerTime);
+    if (currentTimerTime >= 3600) {
+      roundedHours = secondsToTime.h;
+    } else {
+      roundedHours = 0;
+    }
+    if (secondsToTime.m > 0 && secondsToTime.m < 7) {
+      roundedMinutes = 0;
+    } else if (secondsToTime.m >= 7 && secondsToTime.m < 22) {
+      roundedMinutes = 15;
+    } else if (secondsToTime.m >= 22 && secondsToTime.m < 37) {
+      roundedMinutes = 30;
+    } else if (secondsToTime.m >= 37 && secondsToTime.m < 52) {
+      roundedMinutes = 45;
+    } else if ( secondsToTime.m >= 52 && secondsToTime.m < 60) {
+      roundedMinutes = 0;
+      roundedHours = roundedHours + 1;
+    }
     currentTimerTimeSlot.innerText = `${currentTimerTime >= 3600 ? secondsToTime.h + 'h -' : ''} ${currentTimerTime >= 60 ? secondsToTime.m + 'm -' : ''} ${' ' + secondsToTime.s}s`;
+    currentTimerRoundedSlot.innerText = `${roundedHours + 'h -'} ${roundedMinutes}m`;
+    activeTimer.setAttribute('data-seconds', currentTimerTime);
   }, 1000);
 }
 
