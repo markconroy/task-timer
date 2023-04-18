@@ -11,6 +11,13 @@
   box-sizing: border-box;
 }
 
+mark {
+  display: block;
+  text-align: center;
+  padding: 1rem;
+  font-weight: bold;
+}
+
 input,
 button,
 select {
@@ -19,6 +26,7 @@ select {
 
 .timer-table {
   width: 100%;
+  margin-bottom: 1rem;
   border-collapse: collapse;
   border: var(--border);
   text-align: left;
